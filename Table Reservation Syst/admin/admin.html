@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Admin Table View</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="../assets/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+
+	<!-- Custom Stylesheet-->
+	<link type="text/css" rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body style="background-color: #fafafa;">
+	<!--NavBar-->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="box-shadow: 0 3px 3px -3px rgba(0,0,0,.2);">
+		<a class="navbar-brand" href="#" style="font-family: 'Montserrat', sans-serif;
+		font-size: xx-large; color: #616161;">Administrator Panel</a>
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo02"></div>
+		<ul class="nav">
+			<li class="nav-item" role="presentation">
+				<button class="btn btn-outline-secondary" style="margin-right: 10px" data-toggle="modal"
+					data-target="#add-table">Add Table</button>
+			</li>
+			<div class="vl" style="border-left: 2px solid #9e9e9e;"></div>
+			<li class="nav-item" role="presentation">
+				<a href="timetable.html" class="btn btn-outline-secondary ml">Timetable view</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a href="settings.html" class="btn btn-outline-secondary ml">Settings</a>
+			</li>
+		</ul>
+		</div>
+	</nav>
+
+	<!-- Table Component-->
+	<section class="container" style="padding-top: 5%;">
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4" id="tableCard">
+		</div>
+	</section>
+	<!--Modals-->
+	<section>
+		<!-- Add Table -->
+		<div class="modal fade" id="add-table" data-target="#add-table" aria-hidden="true">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">
+							Add Table
+						</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="table-responsive-md">
+							<form id="addTable">
+								<div class="row">
+									<div class="col mb-3">
+										<label for="add-table-no">Table No</label>
+										<input type="text" class="form-control" id="add-table-no" required>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col mb-3">
+										<label for="add-table-capacity">Capacity</label>
+										<input type="text" class="form-control" id="add-table-capacity" required>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col mb-3" id="adj">
+										<input type="hidden" id="adjCounter" value="0"/>
+										<label for="add-adj-tables">Adjacent Tables</label>
+										<input type="number" class="form-control mb-2" id="adj0">
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-danger" data-dismiss="modal">
+								Close
+							</button>
+							<button type="submit" class="btn btn-outline-dark" form="addTable">Add Table</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Edit Table -->
+		<div class="modal fade" id="edit-table" data-target="#edit-table" aria-hidden="true">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">
+							Edit Table
+						</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="table-responsive-md">
+							<form id="editTable">
+								<div class="row">
+									<div class="col mb-3">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" id="edit-table-reserved">
+											<label class="form-check-label" for="edit-table-reserved">
+												Reserved
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col mb-3">
+										<label for="edit-table-capacity">Capacity</label>
+										<input type="number" class="form-control" id="edit-table-capacity" required>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col mb-3">
+										<label for="edit-adj-tables">Adjacent Tables</label>
+										<input type="text" class="form-control" id="edit-adj-tables">
+									</div>
+								</div>
+								<input id="edit-table-ID" type="hidden" />
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-danger" data-dismiss="modal">
+								Close
+							</button>
+							<button type="submit" class="btn btn-outline-dark" form="editTable">Edit Table</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="../assets/node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="../assets/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+	<script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../assets/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+	<script src="../assets/js/admin/admin.js"></script>
+	<script>
+		function addadjinput() {
+				var input = document.createElement("input");
+                input.type = "number";
+				input.className = "form-control mb-2";
+				input.onkeyup = addadjinput;
+                document.getElementById("adj").appendChild(input);
+		}
+	</script>
+</body>
+
+</html>
