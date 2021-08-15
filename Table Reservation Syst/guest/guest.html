@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en"
+	style="background:linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(../assets/images/background.jpg) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size:cover; background-size: cover;">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Guest Page</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="../assets/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+
+	<!-- Custom Stylesheet-->
+	<link type="text/css" rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+	<div id="guest" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="text-center col">
+						<div class="booking-cta">
+							<h1>Book a Table</h1>
+						</div>
+						<div class="col">
+							<div class="guest-form">
+								<form id="reserveTableForm">
+									<div class="row">
+										<div class="col">
+											<div class="form-group">
+												<div class="input-group custom-style mb-3">
+													<div class="input-group-prepend">
+														<span class="input-group-text" id="name">
+															Name
+														</span>
+													</div>
+													<input type="text" class="form-control" aria-label="Name"
+														aria-describedby="name" id="guestName" required>
+												</div>
+											</div>
+										</div>
+										<div class="col">
+											<div class="form-group">
+												<div class="input-group custom-style mb-3">
+													<div class="input-group-prepend">
+														<span class="input-group-text" id="mobile">Mobile</span>
+													</div>
+													<input type="text" class="form-control" aria-label="Mobile"
+														aria-describedby="mobile" id="guestMobile" required>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<div class="form-group">
+												<div class="input-group custom-style mb-3">
+													<div class="input-group-prepend">
+														<span class="input-group-text" id="nopeople">
+															No of People
+														</span>
+													</div>
+													<input type="number" class="form-control" aria-label="Capacity"
+														aria-describedby="nopeople" id="guestCapacity" min="1"
+														oninput="this.value = Math.abs(this.value)" required>
+												</div>
+											</div>
+										</div>
+										<div class="col">
+											<div class="form-group">
+												<div class="input-group custom-style mb-3">
+													<div class="input-group-prepend">
+														<span class="input-group-text" id="rno">
+															Room No
+														</span>
+													</div>
+													<input type="text" class="form-control" aria-label="Room No"
+														aria-describedby="rno" id="guestRoomId">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<div class="form-group">
+												<div class="input-group custom-style mb-3">
+													<div class="input-group-prepend">
+														<span class="input-group-text" id="dat">
+															Date & Time
+														</span>
+													</div>
+													<input type="datetime-local" class="form-control"
+														aria-label="datetime" aria-describedby="dat" id="guestDateTime"
+														style="cursor:pointer" onfocus="setmin()" required>
+												</div>
+											</div>
+										</div>
+										<div class="col">
+											<div class="form-group">
+												<div class="input-group custom-style mb-3">
+													<div class="input-group-prepend">
+														<span class="input-group-text" id="type">
+															Type
+														</span>
+													</div>
+													<select class="custom-select" id="guestFoodType"
+														aria-label="datetime" aria-describedby="type">
+														<option value="1">BreakFast</option>
+														<option value="2">Lunch</option>
+														<option value="3">Dinner</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row" style="padding-left: 33%; padding-right: 33%;">
+										<div class="col mb-3">
+											<button type="submit" class="btn btn-dark" style="width: 150px;"
+												data-toggle="modal" data-target="#bookingModal">Book Now</button>
+										</div>
+										<div class="col">
+											<button type="button" class="btn btn-dark" style="width: 150px;"
+												data-toggle="modal" data-target="#statusModal"
+												onclick="clearStatusModal()">Check Status</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class=" col-12 modal-title text-center" id="statusHead">Status</h3>
+				</div>
+				<div class="modal-body">
+					<form id="reserveStatusForm">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="statusName" class="form-label">Name</label>
+										<input class="form-control" type="text" id="statusName">
+									</div>
+									<div class="form-group">
+										<label for="statusMobile" class="form-label">Mobile</label>
+										<input class="form-control" type="text" id="statusMobile">
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="container" id="reservationStatus"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-dark" form="reserveStatusForm">Check Status</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class=" col-12 modal-title text-center" id="bookingHead">Table Booking</h3>
+				</div>
+				<div class="modal-body">
+					<div id="bookingStatus" style="text-align: center; font-weight: 400;"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../assets/node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="../assets/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+	<script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../assets/node_modules/moment/min/moment.min.js"></script>
+	<script>
+		function setmin() {
+			var d = moment().format().slice(0, 16);
+			console.log(d);
+			document.getElementById("guestDateTime").setAttribute("min", d);
+		}
+	</script>
+
+	<script src="../assets/js/guest/guest.js"></script>
+</body>
+
+</html>
